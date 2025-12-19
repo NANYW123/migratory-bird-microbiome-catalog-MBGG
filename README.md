@@ -1,14 +1,14 @@
-#Here, we build a high-quality migratory bird microbial genome and gene (MBGG) catalog includes 5,823 metagenome-assembled genomes (MAGs), 13,072 plasmid sequences, and 44,974 viral genomes, which represent 1,709 candidate species spanning 36 phyla.
+#Here, we build a high-quality migratory bird microbial genome and gene (MBGG) catalog that includes 5,823 metagenome-assembled genomes (MAGs), 13,072 plasmid sequences, and 44,974 viral genomes, which represent 1,709 candidate species spanning 36 phyla.
 
-###  <A genomic catalog of migratory microbiomes from wild birds across China’s habitats>
+### Title: A genomic catalog of migratory microbiomes from wild birds across China’s habitats
 
-This directory contains scripts related to the manuscript "A genomic catalog of migratory microbiomes from wild birds across China’s habitats". Before running, you must ensure that all required softwares and databases are installed successfully.
+This directory contains scripts related to the manuscript "A genomic catalog of migratory microbiomes from wild birds across China’s habitats". Before running, you must ensure that all required software and databases are installed successfully.
 
 How to Reference?
 If you have used this script in your research, please use the following link for references to our script: https://github.com/NANYW123/migratory-bird-microbiome-catalog-MBGG.git. Please also cite the corresponding software and <A genomic catalog of migratory microbiomes from wild birds across China’s habitats>.
 
 Software and database installation
-Most of the softwares can be installed through conda. The installation method refer to the manual of each software. The following published software is used in the pipeline. The name, version and availablity of the software are as follows:
+Most of the softwares can be installed through conda. The installation method refers to the manual of each software. The following published software is used in the pipeline. The name, version, and availability of the software are as follows:
 
 Software	Availability
 
@@ -111,5 +111,5 @@ Part7: 07_Virome.sh
 
 Part8: 08_Functional annotation.sh
 
-Limitations
+Limitations: 
 This workflow was designed specifically for "A genomic catalog of migratory microbiomes from wild birds across China’s habitats"; editing and revisions might be required before applying to other projects.
