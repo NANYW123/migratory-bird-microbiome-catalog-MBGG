@@ -1,13 +1,10 @@
 #!/bin/bash
 ### Assembly: CleanData to Contigs MEGAHIT v1.2.9
 
-${megahit} -1 ${CleanData}/${SampleID}_final_R1.fastq.gz \
+${metawrap assembly} -1 ${CleanData}/${SampleID}_final_R1.fastq.gz \
 -2 ${CleanData}/${SampleID}_final_R2.fastq.gz \
---min-count 2 \
---k-min 27 \
---k-max 87 \
---k-step 10 \
---num-cpu-threads 20 \
+-t 128 \
+-m 300 \
 --min-contig-len 500 \
 -o ${Assembly}/${SampleID}_megahit
 
