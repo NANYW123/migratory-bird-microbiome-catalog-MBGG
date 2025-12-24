@@ -1,5 +1,5 @@
 #!/bin/bash
-### Assembly: CleanData to Contigs
+### Assembly: CleanData to Contigs MEGAHIT v1.2.9
 
 ${megahit} -1 ${CleanData}/${SampleID}_final_R1.fastq.gz \
 -2 ${CleanData}/${SampleID}_final_R2.fastq.gz \
@@ -14,7 +14,7 @@ ${megahit} -1 ${CleanData}/${SampleID}_final_R1.fastq.gz \
 cp ${SampleID}_megahit/final.contigs.fa ${Contigs}/${SampleID}.fa
 
 
-### Assembly quality was checked using Quast 
+### Assembly quality was checked using Quast v5.3.0 
 
 $ quast.py assembly.fasta -o quast_output
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 ### Binning: Contigs to MAGs
-##use several modules of metawrap pipeline
+##use several modules of metawrap pipeline metaWRAP v1.3.2
 
 mkdir ${Binning}/${SampleID}
 cd ${Binning}/${SampleID}
@@ -24,14 +24,14 @@ metawrap reassemble_bins -o ./BIN_REASSEMBLY/$i -1 ${CleanData}/${SampleID}_fina
 ### rename bin name:prefix SampleID
 for i in $(ls *.fa);do mv $i ${SampleID}_${i};done
 
-### magpurify
+### magpurify v2.1.2 
 
 $magpurify clean-bin ~/link_all_bins/$i ./output ~/magpurify-clean-bin_genomes/$i
 
-### checkm2
+### checkm2 v1.1.0
 $checkm2 predict -i ~/magpurify-clean-bin_genomes/ -o ./checkm2_result --database_path ~/checkm2db/CheckM2_database/uniref100.KO.1.dmnd --threads 64 --force
 
-### MAG de-replication
+### MAG de-replication dRep v3.4.2
 
 ### copy all fasta file of MAG to target directory
 cp ${Binning}/${SampleID}/*.fa ${MAG}
@@ -40,15 +40,14 @@ cp ${Binning}/${SampleID}/*.fa ${MAG}
 ${dRep} dereplicate ${dRep99} -g ${MAGs}/*.fa -p 16 -d -comp 50 -con 5 -nc 0.25 -pa 0.9 -sa 0.99
 ${dRep} cluster ${dRep95} -p 16 -nc 0.25 -pa 0.9 -sa 0.95 -g ${MAGs}/*.fa
 
-### Taxonomic classification
-$gtdbtk classify_wf --cpus 16 --out_dir gtdbtk --genome_dir ../${genomes} --extension fa
+### Taxonomic classification GTDB-Tk v2.3.2 
+$gtdbtk classify_wf --cpus 50 --out_dir gtdbtk --genome_dir ../${genomes} --extension fa
 
-### Phylogenetic analysis
-$phylophlan -i ../${genomes} -d ${phylophlan} --diversity high -f ${cfg} --accurate -o ${OUTPUT} --nproc 8
+### Phylogenetic analysis PhyloPhlAn 3.1.1
+$phylophlan -i ../${genomes} -d ${phylophlan} --diversity high -f ${cfg} --accurate -o ${OUTPUT} --nproc 50
 
 
-### Genome annotation
-
+### Genome annotation prokka v1.14.5
 source activate ~/miniconda3/envs/prokka_env
 
 for i in $(ls ${genomes}/*.fa)
@@ -58,11 +57,8 @@ ID=${file%.*}
 prokka $i --prefix $ID --metagenome --kingdom Bacteria --outdir ${prokka_Result}
 done
 
-### gtdbtk
 
-$gtdbtk classify_wf --genome_dir ./dereplicated_genomes --out_dir ./gtdb_taxonomic_annotation-result --extension fna --prefix ${sample_name}_gtdbtk --cpus 50
-
-### comparem
+### comparem v0.1.2
 
 $comparem aai_wf --cpus 50 ./dereplicated_genomes/ comparem-result-drep
 
